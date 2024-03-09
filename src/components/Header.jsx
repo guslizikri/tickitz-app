@@ -1,12 +1,13 @@
 import React from "react";
-
-function Headeer() {
+import logo from "../assets/img/tickitz2.png";
+import menu from "../assets/img/side-nav.png";
+function Header() {
   return (
     <header className="relative bg-white text-secondary p-2 sm:p-4">
       <div className="container w-full flex items-center justify-between px-2 sm:px-0 md:justify-around">
         {/* <!-- Logo --> */}
 
-        <img src="./assets/img/tickitz2.png" alt="Logo" />
+        <img src={logo} alt="Logo" />
 
         {/* <!-- Navigation --> */}
         <nav className="hidden md:flex w-1/3 justify-evenly">
@@ -34,7 +35,7 @@ function Headeer() {
         {/* <!-- Hamburger Menu (Mobile) --> */}
         <div className="md:hidden">
           <button id="menu-toggle">
-            <img src="./assets/img/side-nav.png" alt="" />
+            <img src={menu} alt="" />
           </button>
         </div>
       </div>
@@ -79,4 +80,4 @@ function Headeer() {
     </header>
   );
 }
-export default Headeer;
+export default Header;
