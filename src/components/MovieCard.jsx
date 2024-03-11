@@ -1,37 +1,43 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import movie from "../assets/img/movie1.png";
 import menu from "../assets/img/side-nav.png";
-function MovieCard() {
+function MovieCard({ id, title, genre, img }) {
   return (
-    <div className="group/content border-2 border-red-500 w-fit flex-shrink-0">
+    <div className="group/content  space-y-2  w-fit flex-shrink-0">
       <div className=" group/item relative flex justify-center items-center  w-fit rounded-md bg-gray-200 ">
         <img
-          src={movie}
+          src={img}
           alt="Movie"
-          className="group-hover/item:brightness-50 h-[378px]  w-[264px] object-cover object-center "
+          className="group-hover/item:brightness-50 rounded-md h-[378px]  w-[264px] object-cover object-center "
         />
         <div className="absolute opacity-0 group-hover/item:opacity-100 flex flex-col gap-2 w-4/5  items-center ">
-          <a href="./public/detail.html" className="w-full">
+          <Link to={`/movie/${id}`} className="w-full">
             <button className="w-full  hover:bg-primary border-[1px] border-white text-white hover:text-secondary px-4 py-2 rounded">
-              Sign Up
+              Detail
             </button>
-          </a>
-          <a href="#" className="w-full">
+          </Link>
+          <Link to={`/movie/${id}`} className="w-full">
             <button className="w-full bg-primary hover:bg-blue-600 text-secondary px-4 py-2 rounded">
-              Sign In
+              Buy Ticket
             </button>
-          </a>
+          </Link>
         </div>
       </div>
-      <div className="group/item ">
-        <h1 className="font-bold text-2xl">Hello</h1>
-        <div className="flex gap-3">
-          <button className="rounded-full bg-[#A0A3BD1A] hover:bg-blue-600 text-secondary px-4 py-2 ">
-            Action
-          </button>
-          <button className="rounded-full bg-[#A0A3BD1A] hover:bg-blue-600 text-secondary px-4 py-2 ">
-            Action
-          </button>
+      <div className="group/item space-y-2">
+        <h1 className="font-bold text-2xl">{title}</h1>
+        <div className="flex gap-3 flex-wrap">
+          {genre.split(", ").map((e, i) => {
+            return (
+              <button
+                key={i}
+                className="rounded-full bg-[#A0A3BD1A] hover:bg-blue-600 text-secondary px-5 py-1 "
+              >
+                {e}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

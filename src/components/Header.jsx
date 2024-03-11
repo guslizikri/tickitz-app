@@ -1,22 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/img/tickitz2.png";
 import menu from "../assets/img/side-nav.png";
 function Header() {
   return (
-    <header className="relative bg-white text-secondary p-2 sm:p-4">
-      <div className="container w-full flex items-center justify-between px-2 sm:px-0 md:justify-around">
+    <header className="container relative bg-white text-secondary p-2 sm:p-4">
+      <div className="w-full flex items-center justify-between px-2 sm:px-0 ">
         {/* <!-- Logo --> */}
 
         <img src={logo} alt="Logo" />
 
         {/* <!-- Navigation --> */}
         <nav className="hidden md:flex w-1/3 justify-evenly">
-          <a href="../index.html" className="hover:text-primary">
+          <Link to={"/"} className="hover:text-primary">
             Home
-          </a>
-          <a href="movie.html" className="hover:text-primary">
+          </Link>
+          <Link to={"/movie"} className="hover:text-primary">
             Movie
-          </a>
+          </Link>
           <a href="#" className="hover:text-primary">
             Buy Ticket
           </a>
@@ -27,9 +28,12 @@ function Header() {
           <button className="hidden md:block bg-white hover:text-white hover:bg-blue-600 border-2 border-primary text-primary px-4 py-2 rounded">
             Sign Up
           </button>
-          <button className="hidden md:block bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded">
-            Sign In
-          </button>
+
+          <Link to={"/login"}>
+            <button className="hidden md:block bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded">
+              Sign In
+            </button>
+          </Link>
         </div>
 
         {/* <!-- Hamburger Menu (Mobile) --> */}

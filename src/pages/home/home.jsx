@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "../../utils/axios";
+
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Subscribe from "../../components/Subscribe";
@@ -8,8 +10,20 @@ import whychoose1 from "../../assets/img/whychoose1.png";
 import whychoose2 from "../../assets/img/whychoose2.png";
 import whychoose3 from "../../assets/img/whychoose3.png";
 function Home() {
+  const [movie, setMovie] = useState(null);
+  useEffect(() => {
+    axios
+      .get("movie")
+      .then((res) => {
+        setMovie(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <div className="space-y-5 h-fit">
+    <div className="space-y-5">
       <Header />
       <section className="container flex flex-col gap-y-4 lg:flex-row items-center justify-between">
         <div className="w-4/5 text-center lg:text-left lg:w-1/2 flex flex-col gap-y-5 ">
@@ -83,12 +97,18 @@ function Home() {
             </h2>
           </div>
           <div className="flex sm:grid justify-items-center  gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
+            {movie &&
+              movie.map((m) => {
+                return (
+                  <MovieCard
+                    key={m.id}
+                    id={m.id}
+                    title={m.title}
+                    img={m.img}
+                    genre={m.genre}
+                  />
+                );
+              })}
           </div>
           <div className="flex justify-center">
             <a href="">

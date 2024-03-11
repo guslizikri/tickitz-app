@@ -7,12 +7,16 @@ import logo from "../../assets/img/tickitz.png";
 
 function Login() {
   let navigate = useNavigate();
+  const [email, setEmail] = useState(null);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [showPw, sethowPw] = useState(false);
   const showPwHandler = (e) => {
     console.log("yeay");
     sethowPw(!showPw);
+  };
+  const changeInputEmailHandler = (e) => {
+    setEmail(e.target.value);
   };
   const changeInputUsernameHandler = (e) => {
     setUsername(e.target.value);
@@ -22,15 +26,12 @@ function Login() {
   };
 
   const loginHandler = (e) => {
-    console.log(username);
-    console.log(password);
-    const data = { username, password };
+    const data = { email, username, password };
     axios
-      .post("auth", data)
+      .post("user", data)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
         alert(res.data.message);
-        navigate("/");
+        navigate("/login");
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -53,6 +54,24 @@ function Login() {
           Sign in with your data that you entered during your registration
         </p>
         <div className="space-y-6">
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Email
+            </label>
+            <div className="mt-2">
+              <input
+                id="email"
+                name="email"
+                type="text"
+                required
+                onChange={changeInputEmailHandler}
+                className="block w-full focus:outline-none rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-300 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
           <div>
             <label
               htmlFor="username"
@@ -116,12 +135,12 @@ function Login() {
 
         <p className="mt-5 text-center text-sm text-gray-500">
           Don’t have an account?
-          <Link
-            to={"/register"}
+          <a
+            href="#"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Sign Up
-          </Link>
+          </a>
         </p>
       </div>
     </div>
