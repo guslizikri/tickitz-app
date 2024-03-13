@@ -1,8 +1,47 @@
-# React + Vite
+<h1 align="center">
+  Responsive Web
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center"><img src="./assets/img/tickitz2.png" width="400px" alt="Tickitz" /></p>
 
-Currently, two official plugins are available:
+<p align="center">
+    <a href="https://www.fazztrack.com/" target="blank">Our Website</a>
+    ·
+    <a href="https://www.fazztrack.com/class/fullstack-website-dan-golang">Join With Us</a>
+    ·
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Installation Steps
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/guslizikri/tickitz-api
+```
+
+2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the app
+
+```bash
+npm start
+```
+
+🌟 You are all set!
+
+## 💻 Built with
+
+- [HTML]: Markup language
+- [CSS]: style sheet language
+- [Bootsrap](https://getbootstrap.com/): Web framework
+
+<hr>
+<p align="center">
+Developed with ❤️ in Indonesia 	🇮🇩
+</p>

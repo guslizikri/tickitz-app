@@ -15,6 +15,7 @@ export default {
       },
       backgroundImage: {
         'login-bg': "url('/src/assets/img/bg-sign.png')",
+        'movie-bg': "url('/src/assets/img/hero.png')",
         'hero-result': "url('/src/assets/img/bg-result.png')",
         'profile': "url('/src/assets/img/profile.png')",
         'loyalty': "url('/src/assets/img/loyalpoint.png')",

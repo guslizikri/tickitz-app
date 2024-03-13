@@ -25,6 +25,7 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(data);
   console.log(data);
@@ -46,21 +47,24 @@ function Home() {
             <div className="md:w-[75%] space-y-5 px-3 flex flex-col items-center justify-center md:items-start">
               <h1 className="font-bold text-4xl text-center">{data.title}</h1>
               <div className="flex gap-3">
-                {data.genre.split(", ").map((e, i) => {
-                  return (
-                    <button
-                      key={i}
-                      className="rounded-full bg-[#A0A3BD1A] hover:bg-blue-600 text-secondary px-5 py-1 "
-                    >
-                      {e}
-                    </button>
-                  );
-                })}
+                {data.genre &&
+                  data.genre.split(", ").map((e, i) => {
+                    return (
+                      <button
+                        key={i}
+                        className="rounded-full bg-[#A0A3BD1A] hover:bg-blue-600 text-secondary px-5 py-1 "
+                      >
+                        {e}
+                      </button>
+                    );
+                  })}
               </div>
               <div className=" flex gap-3 w-full ">
                 <div className="md:w-[25%] w-2/5 flex-shrink-0">
                   <h6 className="text-slate-500">Release Date</h6>
-                  <span className="">{data.release_date.split("T")[0]}</span>
+                  <span className="">
+                    {data.release_date && data.release_date.split("T")[0]}
+                  </span>
                 </div>
                 <div className="w-auto">
                   <h6 className="text-slate-500">Director</h6>
@@ -84,9 +88,9 @@ function Home() {
               </div>
             </div>
           </main>
-          <section className="container">
+          <section className="container px-8 space-y-5">
             <h1>Book Tickets</h1>
-            <section className="grid grid-cols-4 gap-3 justify-between">
+            <section className="grid grid-cols-1  sm:grid-cols-4 gap-3 justify-between">
               <div className="">
                 <label
                   htmlFor="date"
@@ -148,7 +152,7 @@ function Home() {
                 </div>
               </div>
               <div className="self-end ">
-                <button className="w-4/5 bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded">
+                <button className="  w-full bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded">
                   Filter
                 </button>
               </div>
@@ -158,7 +162,7 @@ function Home() {
                 <h3 className=" text-lg font-medium ">Choose Cinema</h3>
                 <span>4 Result</span>
               </div>
-              <ul className="grid w-full gap-6 md:grid-cols-4">
+              <ul className="grid m-5 md:m- gap-6 sm:grid-cols-2 md:grid-cols-4">
                 <li>
                   <input
                     type="radio"
@@ -231,7 +235,9 @@ function Home() {
               </ul>
             </section>
           </section>
-          <Pagination />
+          <div className="flex justify-center">
+            <Pagination />
+          </div>
           <Footer />
         </div>
       ) : (

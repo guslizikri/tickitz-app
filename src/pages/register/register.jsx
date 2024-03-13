@@ -39,7 +39,6 @@ function Login() {
       });
   };
 
-  useEffect(() => {}, [username, password]);
   return (
     <div className="flex bg-login-bg bg-cover shadow-shadow-blur min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -47,12 +46,9 @@ function Login() {
       </div>
 
       <div className="mt-5 bg-white p-5 rounded-xl sm:mx-auto sm:w-full sm:max-w-sm">
-        <h1 className="text-2xl font-bold leading-9 tracking-tight text-gray-900 space-y-3">
-          Welcome Back👋
+        <h1 className="text-2xl text-center my-2 font-bold leading-9 tracking-tight text-gray-900 space-y-3">
+          Welcome to Tickitz
         </h1>
-        <p className=" my-3">
-          Sign in with your data that you entered during your registration
-        </p>
         <div className="space-y-6">
           <div>
             <label
@@ -65,7 +61,7 @@ function Login() {
               <input
                 id="email"
                 name="email"
-                type="text"
+                type="email"
                 required
                 onChange={changeInputEmailHandler}
                 className="block w-full focus:outline-none rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-300 sm:text-sm sm:leading-6"
@@ -128,19 +124,19 @@ function Login() {
               onClick={loginHandler}
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 p-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Sign in
+              Join for free now
             </button>
           </div>
         </div>
 
         <p className="mt-5 text-center text-sm text-gray-500">
-          Don’t have an account?
-          <a
-            href="#"
+          Already have an account?
+          <Link
+            to={`/login`}
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
-            Sign Up
-          </a>
+            Login
+          </Link>
         </p>
       </div>
     </div>

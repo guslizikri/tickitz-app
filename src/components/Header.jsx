@@ -2,10 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/tickitz2.png";
 import menu from "../assets/img/side-nav.png";
+import { useEffect, useState } from "react";
 function Header() {
+  const [showMobileMenu, setshowMobileMenu] = useState(false);
+  const showMobileMenuHandler = (e) => {
+    console.log("yeay");
+    setshowMobileMenu(!showMobileMenu);
+  };
   return (
-    <header className="container relative bg-white text-secondary p-2 sm:p-4">
-      <div className="w-full flex items-center justify-between px-2 sm:px-0 ">
+    <header className=" relative bg-white text-secondary p-5 sm:p-4">
+      <div className="w-full flex items-center justify-between md:justify-around px-2 sm:px-0 ">
         {/* <!-- Logo --> */}
 
         <img src={logo} alt="Logo" />
@@ -38,13 +44,16 @@ function Header() {
 
         {/* <!-- Hamburger Menu (Mobile) --> */}
         <div className="md:hidden">
-          <button id="menu-toggle">
+          <button id="menu-toggle" onClick={showMobileMenuHandler}>
             <img src={menu} alt="" />
           </button>
         </div>
       </div>
       {/* <!-- Mobile Navigation Overlay --> */}
-      <div className="md:hidden hidden" id="mobile-menu">
+      <div
+        className={showMobileMenu ? "md:hidden block" : "md:hidden hidden"}
+        id="mobile-menu"
+      >
         <div className="pb-3 pt-2 pl-3 sm:pl-5">
           <a
             href="#"

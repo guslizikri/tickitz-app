@@ -28,16 +28,17 @@ function MovieCard({ id, title, genre, img }) {
       <div className="group/item space-y-2">
         <h1 className="font-bold text-2xl">{title}</h1>
         <div className="flex gap-3 flex-wrap">
-          {genre.split(", ").map((e, i) => {
-            return (
-              <button
-                key={i}
-                className="rounded-full bg-[#A0A3BD1A] hover:bg-blue-600 text-secondary px-5 py-1 "
-              >
-                {e}
-              </button>
-            );
-          })}
+          {genre &&
+            genre.split(", ").map((e, i) => {
+              return (
+                <button
+                  key={i}
+                  className="rounded-full bg-[#A0A3BD1A] hover:bg-blue-600 text-secondary px-5 py-1 "
+                >
+                  {e}
+                </button>
+              );
+            })}
         </div>
       </div>
     </div>
