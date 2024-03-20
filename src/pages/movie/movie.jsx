@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -8,7 +8,10 @@ import MovieCard from "../../components/MovieCard";
 import Pagination from "../../components/Pagination";
 
 function Movie() {
+  const api = useApi();
+
   const [search, setSearch] = useState("");
+  const [genre, setGenre] = useState("");
   const [meta, setMeta] = useState("");
 
   const [page, setPage] = useState(1);
@@ -33,9 +36,12 @@ function Movie() {
   useEffect(() => {
     getDataMovie();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, page]);
+  }, [search, page, genre]);
   const changeInputQuery = (e) => {
     setQuery(e.target.value);
+  };
+  const changeInputGenre = (e) => {
+    setGenre(e.target.value);
   };
   const onKeyDownSearch = (e) => {
     if (e.key === "Enter") {
@@ -45,8 +51,10 @@ function Movie() {
   };
   console.log(search);
   const getDataMovie = (e) => {
-    axios
-      .get(`movie?page=${page}&limit=${limit}&orderBy=&search=${search}`)
+    api
+      .get(
+        `movie?page=${page}&limit=${limit}&orderBy=&search=${search}&genre=${genre}`
+      )
       .then((res) => {
         setMovie(res.data.data);
         setMeta(res.data.meta);
@@ -90,13 +98,58 @@ function Movie() {
             </div>
             <div className="pt-2 flex-col flex col-span-2 gap-2 text-gray-600">
               <label htmlFor="filter">Filter</label>
-              <input
-                className="border-2 border-slate-400 bg-slate-100 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                id="filter"
-                type="text"
-                name="filter"
-                placeholder="filter"
-              />
+              <ul className="flex gap-3" onChange={changeInputGenre}>
+                <li>
+                  <input
+                    type="radio"
+                    id="ebu"
+                    name="hosting"
+                    value="Action"
+                    className="hidden peer"
+                    required
+                  />
+                  <label
+                    htmlFor="ebu"
+                    className="inline-flex items-center justify-center  w-[146px] py-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    <div className="flex justify-center items-center ">
+                      Action
+                    </div>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="cineone"
+                    name="hosting"
+                    value="Drama"
+                    className="hidden peer"
+                  />
+                  <label
+                    htmlFor="cineone"
+                    className="inline-flex items-center justify-center w-[146px] py-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    <div className="flex justify-center items-center ">
+                      Drama
+                    </div>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hiflix"
+                    name="hosting"
+                    value="War"
+                    className="hidden peer"
+                  />
+                  <label
+                    htmlFor="hiflix"
+                    className="inline-flex items-center justify-center w-[146px] py-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    <div className="flex justify-center items-center ">War</div>
+                  </label>
+                </li>
+              </ul>
             </div>
           </section>
           <div className="flex sm:grid justify-items-center  gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">

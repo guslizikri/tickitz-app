@@ -1,8 +1,8 @@
 <h1 align="center">
-  Responsive Web
+  Tickitz App
 </h1>
 
-<p align="center"><img src="./assets/img/tickitz2.png" width="400px" alt="Tickitz" /></p>
+<p align="center"><img src="./src/assets/img/tickitz-app.png" width="400px" alt="Tickitz" /></p>
 
 <p align="center">
     <a href="https://www.fazztrack.com/" target="blank">Our Website</a>
@@ -10,6 +10,12 @@
     <a href="https://www.fazztrack.com/class/fullstack-website-dan-golang">Join With Us</a>
     ·
 </p>
+
+## About The Project
+
+ <p>
+ <strong>Tickitz App</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad placeat corrupti dolore blanditiis beatae iste natus, fuga quam. Eius maiores voluptate non id beatae temporibus praesentium repudiandae, impedit asperiores rem.
+ </p>
 
 ## 🛠️ Installation Steps
 
@@ -37,9 +43,15 @@ npm start
 
 ## 💻 Built with
 
-- [HTML]: Markup language
-- [CSS]: style sheet language
+- [React]: Markup language
+- [Tailwind]: style sheet language
 - [Bootsrap](https://getbootstrap.com/): Web framework
+
+<hr>
+
+## Website Interface
+
+> <img src="./src/assets/img/tickitz-app-home.png" width="946px" alt="Tickitz" />
 
 <hr>
 <p align="center">

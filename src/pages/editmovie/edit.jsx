@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
 import { useParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
@@ -11,49 +11,44 @@ import logo from "../../assets/img/tickitz.png";
 
 function Edit() {
   const { id } = useParams();
+  const api = useApi();
 
   let navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    image: null,
-    title: null,
-    genre: null,
-    duration: null,
-    director: null,
-    casts: null,
-    synopsis: null,
-    release_date: null,
-  });
-  // const [showPw, sethowPw] = useState(false);
-  // const showPwHandler = (e) => {
-  //   console.log("yeay");
-  //   sethowPw(!showPw);
-  // };
+  const [data, setdata] = useState({});
   const changeInputImgHandler = (e) => {
-    setFormData({
-      ...formData,
-      image: e.target.files[0],
-    });
+    const file = e.target.files[0];
+    if (file) {
+      const tmpdata = { ...data };
+      tmpdata["image"] = file;
+      setdata(tmpdata);
+    }
   };
   const changeInputHandler = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const datas = { ...data };
+    datas[e.target.name] = e.target.value;
+    setdata(datas);
   };
 
   const saveData = (e) => {
-    console.log(formData);
-    axios
-      .patch(`movie/${id}`, formData)
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(`${key}`, data[key]);
+    }
+    api({
+      method: "patch",
+      url: `movie/${id}`,
+      headers: { "Content-Type": "multipart/form-data" },
+      data: formData,
+    })
       .then((res) => {
         alert(res.data.message);
         navigate("/admin");
       })
       .catch((err) => {
-        alert(err.message);
         console.log(err);
       });
   };
+  console.log(data);
   return (
     <>
       <Header />

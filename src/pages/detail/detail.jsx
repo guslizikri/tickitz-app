@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -12,11 +12,13 @@ import sponsor3 from "../../assets/img/sponsor3.png";
 
 import detail from "../../assets/img/movie4.png";
 function Home() {
+  const api = useApi();
+
   const { id } = useParams();
   console.log(id);
   const [data, setData] = useState(null);
   useEffect(() => {
-    axios
+    api
       .get(`movie/${id}`)
       .then((res) => {
         console.log(res);
@@ -27,8 +29,6 @@ function Home() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(data);
-  console.log(data);
   return (
     <>
       {data ? (

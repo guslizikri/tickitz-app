@@ -1,11 +1,34 @@
+import { useState, useEffect } from 'react'
 import axios from "axios";
+import { useSelector } from 'react-redux'
 
-// Set config defaults when creating the instance
-const instance = axios.create({
-    baseURL: 'http://localhost:3001/'
-  });
-  
-  // Alter defaults after instance has been created
-//   instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
-export default instance;
+function useApi(urls = '') {
+  const { token } = useSelector((s) => s.users)
+
+  const [requests, setRequests] = useState({
+    baseURL: 'http://localhost:3001/',
+      // baseURL: import.meta.env.VITE_APP_BASEURL || urls,
+      headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+      }
+  })
+
+  useEffect(() => {
+      setRequests({
+          ...requests,
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+          }
+      })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token])
+
+  return axios.create(requests) // yang dipakai ini
+}
+
+
+
+export default useApi;

@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/reducer/user";
 
 import logo from "../../assets/img/tickitz.png";
 
 function Login() {
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector((s) => s.users);
+
+  const api = useApi();
   let navigate = useNavigate();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+
   const [showPw, sethowPw] = useState(false);
   const showPwHandler = (e) => {
     console.log("yeay");
@@ -25,12 +32,14 @@ function Login() {
     console.log(username);
     console.log(password);
     const data = { username, password };
-    axios
+    api
       .post("auth", data)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        console.log(res);
+        dispatch(login(res.data.token));
         alert(res.data.message);
-        navigate("/");
+        // udah di re direct ke home dengan cek state isauth lalu dimasukkan useeffect didupdate
+        // navigate("/");
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -38,7 +47,13 @@ function Login() {
       });
   };
 
-  useEffect(() => {}, [username, password]);
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuth]);
+
   return (
     <div className="flex bg-login-bg bg-cover shadow-shadow-blur min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
+
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +8,8 @@ import logo from "../../assets/img/tickitz.png";
 
 function Login() {
   let navigate = useNavigate();
+  const api = useApi();
+
   const [email, setEmail] = useState(null);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -27,7 +30,7 @@ function Login() {
 
   const loginHandler = (e) => {
     const data = { email, username, password };
-    axios
+    api
       .post("user", data)
       .then((res) => {
         alert(res.data.message);

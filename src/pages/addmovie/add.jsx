@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -10,24 +10,26 @@ import logo from "../../assets/img/tickitz.png";
 
 function Add() {
   let navigate = useNavigate();
+  const api = useApi();
   const [title, setTitle] = useState(null);
   const [img, setImg] = useState(null);
-  const [genre, setGenre] = useState(null);
+  const [genre, setGenre] = useState([]);
   const [hour, setHour] = useState(null);
   const [minute, setMinute] = useState(null);
   const [director, setDirector] = useState(null);
   const [casts, setCasts] = useState(null);
   const [releaseDate, setReleaseDate] = useState(null);
   const [synopsis, setSynopsis] = useState(null);
+  const [location, setLocation] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [time, setTime] = useState(null);
   // const [showPw, sethowPw] = useState(false);
   // const showPwHandler = (e) => {
   //   console.log("yeay");
   //   sethowPw(!showPw);
   // };
   const changeInputImgHandler = (e) => {
-    console.log(e);
     setImg(e.target.files[0]);
-    console.log(img);
   };
   const changeInputTitleHandler = (e) => {
     setTitle(e.target.value);
@@ -35,6 +37,18 @@ function Add() {
   const changeInputGenreHandler = (e) => {
     setGenre(Number(e.target.value));
     console.log(genre);
+  };
+  const changeInputLocationHandler = (e) => {
+    const inputLocation = e.target.value;
+    const tmpLocation = [...location];
+    tmpLocation.push(inputLocation);
+    setLocation(tmpLocation);
+  };
+  const changeInputStartDateHandler = (e) => {
+    setStartDate(e.target.value);
+  };
+  const changeInputTimeHandler = (e) => {
+    setTime(e.target.value);
   };
   const changeInputHourHandler = (e) => {
     setHour(e.target.value);
@@ -54,17 +68,17 @@ function Add() {
   const changeInputReleaseDateHandler = (e) => {
     setReleaseDate(e.target.value);
   };
-  const data = {
-    img,
-    title,
-    genre: [genre],
-    duration: `${hour}:${minute}`,
-    director,
-    casts,
-    synopsis,
-    releaseDate,
-  };
-  console.log(data);
+  // const data = {
+  //   img,
+  //   title,
+  //   genre: [genre],
+  //   duration: `${hour}:${minute}`,
+  //   director,
+  //   casts,
+  //   synopsis,
+  //   releaseDate,
+  // };
+  console.log(location);
   const saveData = (e) => {
     const formData = new FormData();
     formData.append("image", img);
@@ -75,16 +89,22 @@ function Add() {
     formData.append("casts", casts);
     formData.append("synopsis", synopsis);
     formData.append("release_date", releaseDate);
+    formData.append("location", location);
+    formData.append("start_date", startDate);
+    formData.append("time", time);
 
     console.log(formData);
-    axios
-      .post("movie", formData)
+    api({
+      method: "post",
+      url: `movie`,
+      headers: { "Content-Type": "multipart/form-data" },
+      data: formData,
+    })
       .then((res) => {
         alert(res.data.message);
-        console.log(res);
+        navigate("/admin");
       })
       .catch((err) => {
-        alert(err.message);
         console.log(err);
       });
   };
@@ -248,7 +268,54 @@ function Add() {
                 ></textarea>
               </div>
             </div>
-
+            <div className="mt-2.5 sm:col-span-2">
+              <select
+                onChange={changeInputLocationHandler}
+                id="location"
+                className="appearance-none block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-400 sm:text-sm sm:leading-6 focus:outline-none"
+              >
+                <option value="" disabled>
+                  Location
+                </option>
+                <option value="Jakarta">Jakarta</option>
+                <option value="Surabaya">Surabaya</option>
+                <option value="Yogyakarta">Yogyakarta</option>
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="release-date"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
+                Set Date
+              </label>
+              <div className="mt-2.5">
+                <input
+                  onChange={changeInputStartDateHandler}
+                  id="start-date"
+                  type="date"
+                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-400 sm:text-sm sm:leading-6 focus:outline-none"
+                  placeholder="Select date"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="release-date"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
+                Time
+              </label>
+              <div className="mt-2.5">
+                <input
+                  onChange={changeInputTimeHandler}
+                  id="time"
+                  type="time"
+                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-400 sm:text-sm sm:leading-6 focus:outline-none"
+                  placeholder="Select date"
+                />
+              </div>
+            </div>
             <div className="mt-10 sm:col-span-2">
               <button
                 onClick={saveData}

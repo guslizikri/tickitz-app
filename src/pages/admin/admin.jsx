@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
 
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 
 import { useNavigate } from "react-router-dom";
 import TableAdmin from "../../components/TableAdmin";
+import Pagination from "../../components/Pagination";
+
+import { useDispatch, useSelector } from "react-redux";
+import { meta } from "../../store/reducer/pagination";
 
 function Admin() {
+  const api = useApi();
+  const dispatch = useDispatch();
+  const { totalPage } = useSelector((s) => s.pagination);
+
+  // digunakan untuk useeffect didupdate, dirubah saat proses delete, untuk menandai ada data yang di update
+  const [reload, setReload] = useState(false);
+
   const [search, setSearch] = useState("");
-  const [meta, setMeta] = useState("");
+  const [genre, setGenre] = useState("");
+  const [date, setDate] = useState("");
 
   const [page, setPage] = useState(1);
   const [limit] = useState("8");
@@ -33,23 +45,20 @@ function Admin() {
   useEffect(() => {
     getDataMovie();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, page, movie]);
-  const changeInputQuery = (e) => {
-    setQuery(e.target.value);
+  }, [reload, date]);
+  const changeInputDate = (e) => {
+    setDate(e.target.value);
   };
-  const onKeyDownSearch = (e) => {
-    if (e.key === "Enter") {
-      // console.log(query);
-      setSearch(query);
-    }
-  };
+
   console.log(search);
   const getDataMovie = (e) => {
-    axios
-      .get(`movie?page=${page}&limit=${limit}&orderBy=&search=${search}`)
+    api
+      .get(
+        `movie?page=${page}&limit=${limit}&orderBy=&search=${search}&genre=${genre}&date=${date}`
+      )
       .then((res) => {
         setMovie(res.data.data);
-        setMeta(res.data.meta);
+        dispatch(meta(res.data.meta));
       })
       .catch((err) => {
         console.log(err);
@@ -63,11 +72,12 @@ function Admin() {
     );
 
     if (confirmed) {
-      axios
+      api
         .delete(`movie/${movieId}`)
         .then((res) => {
           console.log(res);
           alert(res.data.message);
+          setReload(!reload);
         })
         .catch((err) => {
           console.log(err);
@@ -82,7 +92,23 @@ function Admin() {
       <main className="container rounded-lg p-3 bg-white mt-5">
         <div className="flex justify-between mb-5">
           <h1 className="font-bold text-4xl">List Movie</h1>
-          <div>
+
+          <div className="flex justify-end gap-3  w-[35%]">
+            <select
+              id="location"
+              name="location"
+              onChange={changeInputDate}
+              className="p-2 block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+            >
+              <option value="" disabled>
+                Release Date
+              </option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+            </select>
+
             <Link to={"/admin/add"}>
               <button className="hidden md:block bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded">
                 Add Movie

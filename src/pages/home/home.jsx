@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axios";
+import useApi from "../../utils/axios";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -10,9 +10,12 @@ import whychoose1 from "../../assets/img/whychoose1.png";
 import whychoose2 from "../../assets/img/whychoose2.png";
 import whychoose3 from "../../assets/img/whychoose3.png";
 function Home() {
+  const api = useApi();
+
   const [movie, setMovie] = useState(null);
+
   useEffect(() => {
-    axios
+    api
       .get("movie")
       .then((res) => {
         setMovie(res.data.data);
@@ -20,6 +23,7 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
