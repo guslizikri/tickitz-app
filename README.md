@@ -1,8 +1,8 @@
 <h1 align="center">
-  Tickitz App
+  ZWallet
 </h1>
 
-<p align="center"><img src="./src/assets/img/tickitz-app.png" width="400px" alt="Tickitz" /></p>
+<p align="center"><img src="./src/assets/img/ZWallet-app.png" width="400px" alt="ZWallet" /></p>
 
 <p align="center">
     <a href="https://www.fazztrack.com/" target="blank">View Demo Project</a>
@@ -16,7 +16,7 @@
 ## About The Project
 
  <p>
- <strong>Tickitz App</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad placeat corrupti dolore blanditiis beatae iste natus, fuga quam. Eius maiores voluptate non id beatae temporibus praesentium repudiandae, impedit asperiores rem.
+ <strong>ZWallet App</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad placeat corrupti dolore blanditiis beatae iste natus, fuga quam. Eius maiores voluptate non id beatae temporibus praesentium repudiandae, impedit asperiores rem.
  </p>
 
 ## 🛠️ Installation Steps
@@ -24,7 +24,7 @@
 1. Clone the repository
 
 ```bash
-git clone https://github.com/guslizikri/tickitz-app.git
+git clone https://github.com/guslizikri/Zwallet.git
 ```
 
 2. Install dependencies
@@ -51,9 +51,23 @@ npm run dev
 
 <hr>
 
+## Team
+
+> All Members of ZWallet Team
+
+|                                 <a href="#" target="_blank">**Full-Stack Developer & Team Leader**</a>                                 |                                         <a href="#" target="_blank">**Full-Stack Developer**</a>                                         |                                       <a href="#" target="_blank">**Full-Stack Developer**</a>                                        |                                         <a href="#" target="_blank">**Full-Stack Developer**</a>                                          |
+| :------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://avatars.githubusercontent.com/u/154682211?v=4" alt="avatar" width="96" height="96">](https://github.com/guslizikri) | [<img src="https://avatars.githubusercontent.com/u/139100874?v=4" alt="avatar" width="96" height="96">](https://github.com/oktaviandwip) | [<img src ="https://avatars.githubusercontent.com/u/67546196?v=4" alt="avatar" width="96" height="96">](https://github.com/Roisfaozi) | [<img src="https://avatars.githubusercontent.com/u/63093816?v=4" alt="avatar" width="96" height="96">)](https://github.com/taufikharahap) |
+|                      <a href="https://github.com/guslizikri" target="_blank">`https://github.com/guslizikri`</a>                       |                     <a href="https://github.com/oktaviandwip" target="_blank">`https://github.com/oktaviandwip`</a>                      |                       <a href="https://github.com/Roisfaozi" target="_blank">`https://github.com/Roisfaozi`</a>                       |                     <a href="https://github.com/taufikharahap" target="_blank">`https://github.com/taufikharahap`</a>                     |
+
+---
+
+<br/>
+<hr>
+
 ## Website Interface
 
-> <img src="./src/assets/img/Tickitz-app-home.png" width="946px" alt="Tickitz" />
+> <img src="./src/assets/img/ZWallet-app-home.png" width="946px" alt="ZWallet" />
 
 <hr>
 <p align="center">
