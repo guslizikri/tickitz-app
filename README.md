@@ -2,7 +2,7 @@
   ZWallet
 </h1>
 
-<p align="center"><img src="./src/assets/img/ZWallet-app.png" width="400px" alt="ZWallet" /></p>
+<p align="center"><img src="./src/assets/img/tickitz-app.png" width="400px" alt="Tickitz" /></p>
 
 <p align="center">
     <a href="https://www.fazztrack.com/" target="blank">View Demo Project</a>
@@ -16,7 +16,7 @@
 ## About The Project
 
  <p>
- <strong>ZWallet App</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad placeat corrupti dolore blanditiis beatae iste natus, fuga quam. Eius maiores voluptate non id beatae temporibus praesentium repudiandae, impedit asperiores rem.
+ <strong>Tickitz App</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad placeat corrupti dolore blanditiis beatae iste natus, fuga quam. Eius maiores voluptate non id beatae temporibus praesentium repudiandae, impedit asperiores rem.
  </p>
 
 ## 🛠️ Installation Steps
@@ -24,7 +24,7 @@
 1. Clone the repository
 
 ```bash
-git clone https://github.com/guslizikri/Zwallet.git
+git clone https://github.com/guslizikri/tickitz-app.git
 ```
 
 2. Install dependencies
@@ -50,7 +50,6 @@ npm run dev
 - [![Redux][Redux]][Redux-url]
 
 <hr>
-
 ## Team
 
 > All Members of ZWallet Team
@@ -64,10 +63,9 @@ npm run dev
 
 <br/>
 <hr>
-
 ## Website Interface
 
-> <img src="./src/assets/img/ZWallet-app-home.png" width="946px" alt="ZWallet" />
+> <img src="./src/assets/img/Tickitz-app-home.png" width="946px" alt="Tickitz" />
 
 <hr>
 <p align="center">
