@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import Subscribe from "../../components/Subscribe";
 import MovieCard from "../../components/MovieCard";
 import Pagination from "../../components/Pagination";
+import { useLocation } from "react-router-dom";
 
 function Movie() {
   const api = useApi();
@@ -29,14 +30,8 @@ function Movie() {
   const [query, setQuery] = useState("");
 
   const [movie, setMovie] = useState(null);
-  useEffect(() => {
-    getDataMovie();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    getDataMovie();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, page, genre]);
+  const location = useLocation();
+
   const changeInputQuery = (e) => {
     setQuery(e.target.value);
   };
@@ -49,8 +44,7 @@ function Movie() {
       setSearch(query);
     }
   };
-  console.log(search);
-  const getDataMovie = (e) => {
+  const getDataMovie = () => {
     api
       .get(
         `movie?page=${page}&limit=${limit}&orderBy=&search=${search}&genre=${genre}`
@@ -64,11 +58,34 @@ function Movie() {
       });
   };
 
+  useEffect(() => {
+    getDataMovie();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    getDataMovie();
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, page, genre, location]);
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
   return (
     <div className="space-y-5">
       <Header />
       <section className="bg-movie-bg w-screen shadow-shadow-blur h-[440px] text-white   flex flex-col justify-center">
-        <div className="flex flex-col px-20 gap-6 w-1/2">
+        <div className="flex flex-col px-8 md:px-20 gap-6 w-full md:w-3/4 lg:w-1/2">
           <span className="hero__content">LIST MOVIE OF THE WEEK</span>
           <h1 className="font-bold text-4xl">
             Experience the Magic of Cinema : Book Your Tickets Today
@@ -83,22 +100,41 @@ function Movie() {
       </section>
       <main className="container">
         <div className="space-y-5">
-          <section className="grid grid-cols-3 gap-x-4 p-3">
+          <section
+            id="search-movie"
+            className="grid md:grid-cols-3 gap-x-4 p-3"
+          >
             <div className="pt-2 flex-col flex gap-2 text-gray-600">
-              <label htmlFor="search">Cari Event</label>
+              <label htmlFor="search">Search Movie</label>
               <input
                 onChange={changeInputQuery}
                 onKeyDown={onKeyDownSearch}
-                className="border-2  border-slate-400 bg-slate-100 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                className="border-2  border-slate-100 bg-stone-50 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                 id="search"
                 type="search"
                 name="search"
                 placeholder="Search"
               />
             </div>
-            <div className="pt-2 flex-col flex col-span-2 gap-2 text-gray-600">
+            <div className="overflow-x-auto pt-2 flex-col flex col-span-2 gap-2 text-gray-600">
               <label htmlFor="filter">Filter</label>
               <ul className="flex gap-3" onChange={changeInputGenre}>
+                <li>
+                  <input
+                    type="radio"
+                    id="all"
+                    name="hosting"
+                    value=""
+                    className="hidden peer"
+                    required
+                  />
+                  <label
+                    htmlFor="all"
+                    className="inline-flex items-center justify-center  w-[146px] py-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    <div className="flex justify-center items-center ">All</div>
+                  </label>
+                </li>
                 <li>
                   <input
                     type="radio"
@@ -152,7 +188,10 @@ function Movie() {
               </ul>
             </div>
           </section>
-          <div className="flex sm:grid justify-items-center  gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          <div
+            id="movie"
+            className="px-2 flex sm:grid justify-items-center  gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
+          >
             {movie &&
               movie.map((m) => {
                 return (
@@ -175,26 +214,25 @@ function Movie() {
           </div>
           <div className="flex justify-center">{/* <Pagination /> */}</div>
           <nav className="flex justify-center">
-            <ul className="flex items-center  -space-x-px gap-2 h-10 text-base">
-              <li>
-                <a
+            {movie && (
+              <div className="flex items-center  -space-x-px gap-2 h-10 text-base">
+                <button
                   onClick={handlePrevPage}
-                  href="#"
+                  disabled={meta.prev ? false : true}
                   className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Prev
-                </a>
-              </li>
-              <li>
-                <a
+                </button>
+
+                <button
                   onClick={handleNextPage}
-                  href="#"
+                  disabled={meta.next ? false : true}
                   className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Next
-                </a>
-              </li>
-            </ul>
+                </button>
+              </div>
+            )}
           </nav>
         </div>
       </main>

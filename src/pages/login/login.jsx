@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/reducer/user";
-
+import { Icon } from "@iconify/react";
 import logo from "../../assets/img/tickitz.png";
 
 function Login() {
@@ -18,7 +18,6 @@ function Login() {
 
   const [showPw, sethowPw] = useState(false);
   const showPwHandler = (e) => {
-    console.log("yeay");
     sethowPw(!showPw);
   };
   const changeInputUsernameHandler = (e) => {
@@ -29,13 +28,10 @@ function Login() {
   };
 
   const loginHandler = (e) => {
-    console.log(username);
-    console.log(password);
     const data = { username, password };
     api
       .post("auth", data)
       .then((res) => {
-        console.log(res);
         dispatch(login(res.data.token));
         alert(res.data.message);
         // udah di re direct ke home dengan cek state isauth lalu dimasukkan useeffect didupdate
@@ -105,18 +101,25 @@ function Login() {
                 </a>
               </div>
             </div>
-            <div className="mt-2">
+            <div className="mt-2 relative">
               <input
                 id="password"
                 name="password"
-                type={showPw ? "password" : "text"}
+                type={showPw ? "text" : "password"}
                 autoComplete="current-password"
                 required
                 onChange={changeInputPasswordHandler}
                 className="block w-full focus:outline-none rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-300 sm:text-sm sm:leading-6"
               />
+              <p
+                onClick={showPwHandler}
+                className="absolute right-2 top-[32%] "
+              >
+                <Icon
+                  icon={showPw ? "mdi:eye-outline" : "mdi:eye-off-outline"}
+                />
+              </p>
             </div>
-            <p onClick={showPwHandler}>Show Pw</p>
           </div>
 
           <div>

@@ -9,9 +9,24 @@ import MovieCard from "../../components/MovieCard";
 import whychoose1 from "../../assets/img/whychoose1.png";
 import whychoose2 from "../../assets/img/whychoose2.png";
 import whychoose3 from "../../assets/img/whychoose3.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getprofile } from "../../store/reducer/user";
+import { Link } from "react-router-dom";
 function Home() {
   const api = useApi();
 
+  const dispatch = useDispatch();
+  const { isAuth, role } = useSelector((s) => s.users);
+  const getUser = (e) => {
+    api
+      .get("user")
+      .then(({ data }) => {
+        dispatch(getprofile(data.data[0]));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
@@ -23,6 +38,9 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
+    if (isAuth) {
+      getUser();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -100,7 +118,7 @@ function Home() {
               Exciting Movies That Should Be Watched Today
             </h2>
           </div>
-          <div className="flex sm:grid justify-items-center  gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          <div className="px-2 flex sm:grid justify-items-center  gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {movie &&
               movie.map((m) => {
                 return (
@@ -115,9 +133,9 @@ function Home() {
               })}
           </div>
           <div className="flex justify-center">
-            <a href="">
+            <Link to="/movie#search-movie">
               <span>View Al</span>
-            </a>
+            </Link>
           </div>
         </div>
       </main>

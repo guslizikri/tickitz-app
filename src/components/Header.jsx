@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/tickitz2.png";
-import profile from "../assets/img/profile.png";
+import defaultProfile from "../assets/img/profile-default.png";
 import search from "../assets/img/icon-search.png";
 import menu from "../assets/img/side-nav.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,9 +9,8 @@ import { useEffect, useState } from "react";
 import { logout } from "../store/reducer/user";
 
 function Header() {
-  const { isAuth, role } = useSelector((s) => s.users);
+  const { isAuth, role, profile } = useSelector((s) => s.users);
   const dispatch = useDispatch();
-
   const [showMobileMenu, setshowMobileMenu] = useState(false);
   const [showProfileMenu, setshowProfileMenu] = useState(false);
 
@@ -60,7 +59,7 @@ function Header() {
         <div className="button hidden md:flex gap-4 items-center">
           {!isAuth ? (
             <>
-              <Link to={"/login"}>
+              <Link to={"/register"}>
                 <button className=" md:block bg-white hover:text-white hover:bg-blue-600 border-2 border-primary text-primary px-4 py-2 rounded">
                   Sign Up
                 </button>
@@ -79,9 +78,9 @@ function Header() {
               </div>
               <div className="relative">
                 <img
-                  src={profile}
+                  src={profile.img ? profile.img : defaultProfile}
                   alt=""
-                  className="w-[56px] rounded-full"
+                  className="w-[56px] rounded-full h-[56px]"
                   onClick={showProfileMenuHandler}
                 />
                 <div
@@ -187,9 +186,9 @@ function Header() {
               <div className="flex items-center gap-6">
                 <div className="relative">
                   <img
-                    src={profile}
+                    src={profile.img ? profile.img : defaultProfile}
                     alt=""
-                    className="w-[56px] rounded-full"
+                    className="w-[56px] rounded-full h-[56px]"
                     onClick={showProfileMenuHandler}
                   />
                   <div
@@ -201,15 +200,16 @@ function Header() {
                     aria-labelledby="user-menu-button"
                     tabIndex="-1"
                   >
-                    <a
-                      href="#"
+                    <Link
+                      to={"/profile"}
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-0"
                     >
                       Your Profile
-                    </a>
+                    </Link>
+
                     <a
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700"

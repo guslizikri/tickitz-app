@@ -1,23 +1,23 @@
 import React from "react";
 import useApi from "../utils/axios";
-import { useNavigate } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function FormProfile() {
   const api = useApi();
+  const { profile } = useSelector((s) => s.users);
+
   const [userData, setUserData] = useState({});
   const changeHanlder = (e) => {
     const data = { ...userData };
     data[e.target.name] = e.target.value;
-    console.log(data);
     setUserData(data);
   };
-
+  console.log(profile);
   const submitHandler = (e) => {
     e.preventDefault();
 
-    console.log("asd");
     api({
       method: "PATCH",
       url: "user",
@@ -56,7 +56,7 @@ function FormProfile() {
                 id="firstname"
                 onChange={changeHanlder}
                 className="block w-full focus:outline-none rounded-md border-0 py-2.5 pl-6 pr-20 text-[#696F79] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-400 sm:text-sm sm:leading-6"
-                placeholder="Jonas"
+                placeholder={profile.firstname}
               />
             </div>
           </div>
@@ -74,7 +74,7 @@ function FormProfile() {
                 id="lastname"
                 onChange={changeHanlder}
                 className="block w-full focus:outline-none rounded-md border-0 py-2.5 pl-6 pr-20 text-[#696F79] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-400 sm:text-sm sm:leading-6"
-                placeholder="El Rodriguez"
+                placeholder={profile.lastname}
               />
             </div>
           </div>
@@ -92,7 +92,7 @@ function FormProfile() {
                 id="email"
                 onChange={changeHanlder}
                 className="block w-full focus:outline-none rounded-md border-0 py-2.5 pl-6 pr-20 text-[#696F79] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-400 sm:text-sm sm:leading-6"
-                placeholder="jonasrodrigu123@gmail.com"
+                placeholder={profile.email}
               />
             </div>
           </div>
@@ -114,7 +114,7 @@ function FormProfile() {
                 id="phone"
                 onChange={changeHanlder}
                 className="block w-full focus:outline-none rounded-md border-0 py-2.5 pl-14 pr-20 text-[#696F79] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-400 sm:text-sm sm:leading-6"
-                placeholder="81445687121"
+                placeholder={profile.phone_number}
               />
             </div>
           </div>

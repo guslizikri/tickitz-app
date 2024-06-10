@@ -55,7 +55,6 @@ function Profile({ fullname, img, phone_number }) {
         console.log(err);
       });
   };
-  console.log(userDataImage);
 
   //   edit profile
   const [userData, setUserData] = useState({});

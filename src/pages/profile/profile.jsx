@@ -1,40 +1,35 @@
 import React, { useState, useEffect } from "react";
 import useApi from "../../utils/axios";
-
-import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import ProfileCard from "../../components/Profile";
 import FormProfile from "../../components/FormProfile";
 import NavProfile from "../../components/NavProfile";
 import NavProfileMobile from "../../components/NavProfileMobile";
-
-import { useNavigate } from "react-router-dom";
-import TableAdmin from "../../components/TableAdmin";
+import { useDispatch, useSelector } from "react-redux";
+import { getprofile } from "../../store/reducer/user";
+import defaultProfile from "../../assets/img/profile-default.png";
 
 function Profile() {
   const api = useApi();
-
-  //   get profile user
-  const [profile, setProfile] = useState(null);
+  const { profile } = useSelector((s) => s.users);
+  const dispatch = useDispatch();
 
   const getUser = (e) => {
     api
       .get("user")
       .then(({ data }) => {
-        setProfile(data.data[0]);
+        dispatch(getprofile(data.data[0]));
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   //   end profile user
-
   useEffect(() => {
     getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(profile);
+
   return (
     <div className="">
       <Header />
@@ -43,7 +38,10 @@ function Profile() {
 
         <main className=" lg:container min-h-screen p-8 flex gap-5 justify-center">
           {profile && (
-            <ProfileCard fullname={profile.fullname} img={profile.img} />
+            <ProfileCard
+              fullname={profile.fullname ? profile.fullname : "Your Name"}
+              img={profile.img ? profile.img : defaultProfile}
+            />
           )}
           <div className="hidden md:block setting w-3/4">
             <NavProfile />
