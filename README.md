@@ -16,7 +16,7 @@
 ## About The Project
 
  <p>
- <strong>Tickitz App</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad placeat corrupti dolore blanditiis beatae iste natus, fuga quam. Eius maiores voluptate non id beatae temporibus praesentium repudiandae, impedit asperiores rem.
+ <strong>Tickitz App</strong> Merupakan  website pembelian tiket yang dapat memudahkan pembelian tiket movie yang akan tayang di bioskop kesayangan anda.
  </p>
 
 ## 🛠️ Installation Steps
