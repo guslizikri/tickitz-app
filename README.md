@@ -1,15 +1,15 @@
 <h1 align="center">
-  ZWallet
+  Tickitz
 </h1>
 
 <p align="center"><img src="./src/assets/img/tickitz-app.png" width="400px" alt="Tickitz" /></p>
 
 <p align="center">
-    <a href="https://www.fazztrack.com/" target="blank">View Demo Project</a>
+    <a href="https://tickitzfwg19.netlify.app" target="blank">View Demo Project</a>
     ·
     <a href="https://github.com/guslizikri/Zwallet/issues" target="blank">Report Bug</a>
     ·
-    <a href="https://github.com/guslizikri/Zwallet/pulls">Request Feature</a>
+    <a href="https://github.com/guslizikri/tickitz-api">Related Project</a>
     ·
 </p>
 
@@ -49,23 +49,11 @@ npm run dev
 - [![Tailwind][Tailwind-CSS]][Tailwind-url]
 - [![Redux][Redux]][Redux-url]
 
-<hr>
-## Team
-
-> All Members of ZWallet Team
-
-|                                 <a href="#" target="_blank">**Full-Stack Developer & Team Leader**</a>                                 |                                         <a href="#" target="_blank">**Full-Stack Developer**</a>                                         |                                       <a href="#" target="_blank">**Full-Stack Developer**</a>                                        |                                         <a href="#" target="_blank">**Full-Stack Developer**</a>                                          |
-| :------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://avatars.githubusercontent.com/u/154682211?v=4" alt="avatar" width="96" height="96">](https://github.com/guslizikri) | [<img src="https://avatars.githubusercontent.com/u/139100874?v=4" alt="avatar" width="96" height="96">](https://github.com/oktaviandwip) | [<img src ="https://avatars.githubusercontent.com/u/67546196?v=4" alt="avatar" width="96" height="96">](https://github.com/Roisfaozi) | [<img src="https://avatars.githubusercontent.com/u/63093816?v=4" alt="avatar" width="96" height="96">)](https://github.com/taufikharahap) |
-|                      <a href="https://github.com/guslizikri" target="_blank">`https://github.com/guslizikri`</a>                       |                     <a href="https://github.com/oktaviandwip" target="_blank">`https://github.com/oktaviandwip`</a>                      |                       <a href="https://github.com/Roisfaozi" target="_blank">`https://github.com/Roisfaozi`</a>                       |                     <a href="https://github.com/taufikharahap" target="_blank">`https://github.com/taufikharahap`</a>                     |
-
----
-
 <br/>
 <hr>
 ## Website Interface
 
-> <img src="./src/assets/img/Tickitz-app-home.png" width="946px" alt="Tickitz" />
+> <img src="./src/assets/img/tickitz - movie.png" width="946px" alt="Tickitz" />
 
 <hr>
 <p align="center">
